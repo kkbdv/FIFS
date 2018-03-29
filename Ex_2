@@ -1,0 +1,79 @@
+package com.Test01;
+
+import java.util.Scanner;
+class process{
+	String  start;
+	 int time;
+	 int remainder;
+	 int result;
+	 String over;
+	 int hour;
+	 int minute;
+	 String[] hm;
+	 int uph;
+	 int upm;
+	 int[] overtime=new int[2];
+	 
+	
+	public process(String start,int time) {
+		
+		this.start=start;
+		this.time=time;
+	}
+	public void reverse(){
+		
+		hm=start.split(":");
+		hour=Integer.parseInt(hm[0]);
+		minute=Integer.parseInt(hm[1]);
+		result=time/60;
+		remainder=time%60;
+		
+	}
+	public void calcu(){
+		overtime[0]=hour+result;
+		overtime[1]=minute+remainder;
+		System.out.println("overtime is : "+overtime[0]+":"+overtime[1]);
+	}
+	public void calcu2(){
+		overtime[0]=uph-overtime[0]+result;
+		overtime[1]=upm-overtime[1]+remainder;
+		
+		System.out.println("overtime is : "+overtime[0]+":"+overtime[1]);
+	}
+	
+}
+
+class fun1 extends process{
+
+	public fun1(String start, int time) {
+		super(start, time);
+		
+	}
+	
+	
+}
+
+
+
+public class Ex_1 {
+
+	public static void main(String[] args) {
+		
+		System.out.println("Input the start-time");
+		Scanner sc=new Scanner(System.in);
+		String a=sc.next();
+		int b=sc.nextInt();
+		
+		process[] a1=new process[4];
+		for(int i=0;i<4;i++){
+			
+			a1[i]=new process(a,b);
+		}
+		for(int i=1;i<4;i++){
+			a1[i].uph=a1[i-1].overtime[0];
+			a1[i].upm=a1[i-1].overtime[1];
+		}
+		
+	}
+
+}
